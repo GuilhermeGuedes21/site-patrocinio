@@ -1,0 +1,43 @@
+@media (max-width: 1024px) {
+  .sobre-grid { grid-template-columns: 1fr; }
+  .porque-grid { grid-template-columns: repeat(2, 1fr); }
+  .rankings-grid { grid-template-columns: repeat(2, 1fr); }
+  .beneficios-grid { grid-template-columns: repeat(2, 1fr); }
+  .cotas-grid { grid-template-columns: 1fr; }
+  .destaque-cota { transform: none; }
+  .alvo-principal { grid-template-columns: 1fr; text-align: center; }
+  .alvo-countdown { justify-content: center; }
+  .alvo-sec-divisor { display: none; }
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  #hero { flex-direction: column; text-align: center; padding: 140px 24px 60px; gap: 40px; }
+  .hero-content { max-width: 100%; }
+  .hero-stats, .hero-btns { justify-content: center; }
+  .hero-image { width: 300px; }
+
+  .timeline::before { left: 20px; }
+  .timeline-item, .timeline-item.left, .timeline-item.right {
+    width: 100%; left: 0; text-align: left; padding-left: 50px; padding-right: 10px;
+  }
+  .timeline-item.left::before, .timeline-item.right::before { left: 12px; }
+}
+
+@media (max-width: 600px) {
+  .section-title { font-size: 1.8rem; }
+  .porque-grid, .rankings-grid, .beneficios-grid { grid-template-columns: 1fr; }
+  .stats-bar { gap: 30px; }
+  .hero-content h1 { font-size: 2.4rem; }
+  .alvo-icone-wrap { display: none; }
+  .count-bloco { min-width: 54px; padding: 10px; }
+
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
