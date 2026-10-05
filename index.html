@@ -10,7 +10,7 @@
   <meta property="og:title" content="Guilherme Guedes — Velocista de Natação" />
   <meta property="og:description" content="Recordista Brasileiro Master 50m Livre (23s99). Melhor marca absoluta: 23s61. 1° da Bahia em 4 provas." />
   <meta property="og:image" content="images/foto-atleta.png" />
-  <meta property="og:url" content="https://seusite.com" />
+  <meta property="og:url" content="https://guilhermeguedes.netlify.app/" />
   <meta property="og:type" content="website" />
 
   <title>Guilherme Guedes | Velocista de Natação</title>
@@ -21,6 +21,72 @@
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+
+  <style>
+    /* Botão do Instagram posicionado acima do WhatsApp */
+    .instagram-float {
+      position: fixed;
+      right: 24px;
+      bottom: 96px;
+      z-index: 999;
+      display: flex;
+      width: 60px;
+      height: 60px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      font-size: 30px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .instagram-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Vídeos usam o mesmo formato dos cards de foto */
+    .gallery-item.video-item::before {
+      content: '\f04b';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+    }
+    .gallery-item.video-item {
+      cursor: pointer;
+    }
+    .gallery-item.video-item img {
+      object-position: center;
+    }
+    .gallery-item img[src*="concurso-master-2026.jpg"] {
+      object-position: center 25%;
+    }
+
+    /* Player de vídeo dentro do lightbox */
+    .lightbox-video {
+      display: none;
+      width: min(88vw, 1100px);
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: 10px;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox-video.visivel {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .instagram-float {
+        width: 52px;
+        height: 52px;
+        right: 16px;
+        bottom: 78px;
+        font-size: 26px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -311,6 +377,17 @@
           </div>
         </div>
 
+        <div class="timeline-item left">
+          <div class="timeline-card destaque">
+            <h3>🏆 2º Concurso Master 2026</h3>
+            <p class="data">05/09/2026 • Feira de Santana – BA</p>
+            <p>Categoria Pré-Master</p>
+            <p>🏊 100m Livre — <span class="joia-brilhante">QUEBRA DO RECORDE BAIANO</span></p>
+            <p>🏊 50m Livre</p>
+            <span class="badge">Recorde Baiano • Categoria Pré-Master</span>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="onda-divisor onda-base"></div>
@@ -411,17 +488,38 @@
         <div class="gallery-item"><img src="images/natacao10.jpeg" alt="Natação - foto 10" loading="lazy" /></div>
         <div class="gallery-item"><img src="images/natacao11.jpeg" alt="Natação - foto 11" loading="lazy" /></div>
         <div class="gallery-item"><img src="images/natacao12.jpeg" alt="Natação - foto 12" loading="lazy" /></div>
+
+        <div class="gallery-item">
+          <img src="images/concurso-master-2026.jpg" alt="Guilherme Guedes no 2º Concurso Master 2026, em Feira de Santana" loading="lazy" />
+          <div class="gallery-caption">2º Concurso Master 2026 • Feira de Santana</div>
+        </div>
+
+        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/-5dOT_scxq4?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 1">
+          <img src="https://img.youtube.com/vi/-5dOT_scxq4/hqdefault.jpg" alt="Vídeo de treino de natação 1" loading="lazy" />
+          <div class="gallery-caption">Momentos do atleta</div>
+        </div>
+
+        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/4SI5wKTa8rE?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 2">
+          <img src="https://img.youtube.com/vi/4SI5wKTa8rE/hqdefault.jpg" alt="Vídeo de treino de natação 2" loading="lazy" />
+          <div class="gallery-caption">Momentos do atleta</div>
+        </div>
+
+        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/l9LlP9byqkk?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 3">
+          <img src="https://img.youtube.com/vi/l9LlP9byqkk/hqdefault.jpg" alt="Vídeo de treino de natação 3" loading="lazy" />
+          <div class="gallery-caption">Momentos do atleta</div>
+        </div>
       </div>
     </div>
     <div class="onda-divisor onda-base"></div>
   </section>
 
   <!-- ===== LIGHTBOX ===== -->
-  <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
-    <span class="lightbox-prev" id="lightboxPrev">&#10094;</span>
-    <span class="lightbox-next" id="lightboxNext">&#10095;</span>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador da galeria">
+    <span class="lightbox-close" id="lightboxClose" role="button" tabindex="0" aria-label="Fechar">&times;</span>
+    <span class="lightbox-prev" id="lightboxPrev" role="button" tabindex="0" aria-label="Item anterior">&#10094;</span>
+    <span class="lightbox-next" id="lightboxNext" role="button" tabindex="0" aria-label="Próximo item">&#10095;</span>
     <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+    <iframe class="lightbox-video" id="lightboxVideo" src="" title="Vídeo da galeria" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 
@@ -468,7 +566,7 @@
         <div class="alvo-texto">
           <span class="alvo-mes-label">NOVEMBRO • 2026</span>
           <h3>Campeonato Brasileiro de Verão</h3>
-          <p class="alvo-data-txt"><i class="fas fa-calendar-alt"></i> 09 a 14 de novembro de 2026</p>
+          <p class="alvo-data-txt"><i class="fas fa-calendar-alt"></i> 24 a 28 de novembro de 2026</p>
           <p class="alvo-local-txt"><i class="fas fa-map-marker-alt"></i> Rio de Janeiro – RJ</p>
           <p class="alvo-desc-txt">
             Toda a preparação de 2026 converge para este momento.
@@ -607,11 +705,144 @@
     <p>Salvador, Bahia • Dados: CBDA — Janeiro/2026</p>
   </footer>
 
+  <!-- ===== INSTAGRAM FLUTUANTE ===== -->
+  <a href="https://www.instagram.com/guilhermeguedes0/" class="instagram-float" target="_blank" rel="noopener noreferrer" aria-label="Acesse meu Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
   <!-- ===== WHATSAPP FLUTUANTE ===== -->
   <a href="https://wa.me/5571981972040?text=Olá%20Guilherme!%20Vi%20seu%20site%20e%20quero%20conversar%20sobre%20patrocínio" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale comigo no WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <script src="js/main.js"></script>
+  <script>
+    // ===== MENU HAMBURGER =====
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('mobile-ativo');
+      });
+    }
+
+    // ===== SCROLL SUAVE =====
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (navLinks) navLinks.classList.remove('mobile-ativo');
+      });
+    });
+
+    // ===== COUNTDOWN =====
+    const targetDate = new Date('2026-11-24T00:00:00').getTime();
+
+    function updateCountdown() {
+      const remaining = targetDate - Date.now();
+      if (remaining <= 0) return;
+
+      const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+
+      const daysEl = document.getElementById('dias');
+      const hoursEl = document.getElementById('horas');
+      const minutesEl = document.getElementById('minutos');
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== GALERIA E LIGHTBOX: FOTOS E VÍDEOS =====
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+
+    let visibleItems = [];
+    let currentIndex = 0;
+
+    function refreshVisibleItems() {
+      visibleItems = galleryItems.filter(item => !item.classList.contains('oculto'));
+    }
+
+    function showGalleryItem(index) {
+      if (!visibleItems.length) return;
+
+      currentIndex = (index + visibleItems.length) % visibleItems.length;
+      const item = visibleItems[currentIndex];
+      const videoUrl = item.dataset.video;
+      const image = item.querySelector('img');
+
+      lightboxVideo.src = '';
+      lightboxVideo.classList.remove('visivel');
+      lightboxImg.style.display = 'none';
+
+      if (videoUrl) {
+        lightboxVideo.src = videoUrl;
+        lightboxVideo.classList.add('visivel');
+      } else if (image) {
+        lightboxImg.src = image.src;
+        lightboxImg.alt = image.alt;
+        lightboxImg.style.display = 'block';
+      }
+
+      lightboxCounter.textContent = `${currentIndex + 1} / ${visibleItems.length}`;
+    }
+
+    function openLightbox(item) {
+      refreshVisibleItems();
+      currentIndex = visibleItems.indexOf(item);
+      if (currentIndex < 0) return;
+
+      showGalleryItem(currentIndex);
+      lightbox.classList.add('ativo');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('ativo');
+      lightboxVideo.src = '';
+      document.body.style.overflow = '';
+    }
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => openLightbox(item));
+      item.addEventListener('keydown', event => {
+        if (item.dataset.video && (event.key === 'Enter' || event.key === ' ')) {
+          event.preventDefault();
+          openLightbox(item);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => showGalleryItem(currentIndex - 1));
+    lightboxNext.addEventListener('click', () => showGalleryItem(currentIndex + 1));
+
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!lightbox.classList.contains('ativo')) return;
+
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') showGalleryItem(currentIndex - 1);
+      if (event.key === 'ArrowRight') showGalleryItem(currentIndex + 1);
+    });
+  </script>
 </body>
 </html>
