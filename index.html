@@ -77,7 +77,369 @@
       display: block;
     }
 
+    /* ===== CAMADA FUTURISTA: LARGADA, RAIA E PAINEL DO ATLETA ===== */
+    .hero-lanes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.23;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 8.8%,
+        rgba(0, 212, 255, 0.28) 9%,
+        transparent 9.15%,
+        transparent 18%
+      );
+      mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+      animation: raiaEmMovimento 28s linear infinite;
+    }
+
+    @keyframes raiaEmMovimento {
+      from { background-position: 0 0; }
+      to { background-position: 320px 0; }
+    }
+
+    .start-sweep {
+      position: fixed;
+      z-index: 1001;
+      top: 48%;
+      left: -110%;
+      width: 100%;
+      height: 2px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, #00d4ff 35%, #fff 50%, #ffd60a 65%, transparent);
+      box-shadow: 0 0 12px #00d4ff, 0 0 30px rgba(0, 212, 255, 0.8);
+      animation: largada 1.45s cubic-bezier(.22,.7,.25,1) forwards;
+    }
+
+    @keyframes largada {
+      0% { transform: translateX(0); opacity: 0; }
+      12% { opacity: 1; }
+      82% { opacity: 0.9; }
+      100% { transform: translateX(220vw); opacity: 0; }
+    }
+
+    .hero-content h1 {
+      opacity: 0;
+      clip-path: inset(0 100% 0 0);
+      animation: revelarTitulo 0.85s 0.35s cubic-bezier(.2,.75,.25,1) forwards;
+    }
+
+    @keyframes revelarTitulo {
+      to { opacity: 1; clip-path: inset(0 0 0 0); }
+    }
+
+    .hero-image {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      width: min(560px, 46vw);
+    }
+
+    .hero-image img {
+      width: 56%;
+      flex: 0 0 56%;
+    }
+
+    .athlete-panel {
+      width: 44%;
+      padding: 20px 18px;
+      color: #fff;
+      border: 1px solid rgba(0, 212, 255, 0.42);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(3, 30, 49, 0.92), rgba(5, 82, 108, 0.72));
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34), inset 0 0 24px rgba(0, 212, 255, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .athlete-panel-kicker {
+      display: block;
+      margin-bottom: 14px;
+      color: #00d4ff;
+      font: 800 0.66rem/1.3 var(--fonte-titulo);
+      letter-spacing: 1.3px;
+    }
+
+    .athlete-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 15px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 214, 10, 0.45);
+      border-radius: 999px;
+      color: #ffd60a;
+      background: rgba(255, 214, 10, 0.1);
+      font: 700 0.67rem/1.2 var(--fonte-titulo);
+      white-space: nowrap;
+    }
+
+    .athlete-data {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .athlete-data span,
+    .athlete-record > span {
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.68rem;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .athlete-data strong {
+      color: #fff;
+      font: 700 0.82rem/1.45 var(--fonte-titulo);
+    }
+
+    .athlete-record {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 6px;
+      padding: 12px;
+      border-radius: 11px;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .athlete-record strong {
+      color: #ffd60a;
+      font: 900 1.7rem/1.1 var(--fonte-titulo);
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 14px rgba(255, 214, 10, 0.28);
+    }
+
+    .athlete-record small {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.62rem;
+    }
+
+    /* Cronômetro digital e brilho discreto nos resultados */
+    .tempo-crono {
+      display: inline-flex !important;
+      align-items: baseline;
+      gap: 0;
+      color: #ffd60a !important;
+      font-family: "Courier New", monospace !important;
+      font-size: clamp(2rem, 4vw, 2.7rem) !important;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(255, 214, 10, 0.34);
+      animation: pulsoCronometro 3.2s ease-in-out infinite;
+    }
+
+    .tempo-crono .tempo-unidade {
+      color: #fff;
+      font-size: 0.58em;
+      font-weight: 700;
+      margin: 0 0.04em;
+    }
+
+    @keyframes pulsoCronometro {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.22); }
+    }
+
+    #hero .stat,
+    .stats-bar-item,
+    .ranking-card .tempo {
+      transition: transform 0.3s ease, filter 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    #hero .stat:hover,
+    .stats-bar-item:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.12);
+    }
+
+    #hero .stat:hover strong,
+    .stats-bar-item:hover strong,
+    .ranking-card:hover .tempo {
+      text-shadow: 0 0 14px rgba(0, 212, 255, 0.58);
+    }
+
+    /* Divisórias com reflexos de superfície, em vez de faixas brancas */
+    .onda-divisor {
+      height: 72px;
+      opacity: 0.72;
+      background-repeat: repeat-x;
+      background-size: 1000px 90px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 90'%3E%3Cpath d='M0 48 C150 10 330 82 500 45 S850 15 1000 48' fill='none' stroke='%2300d4ff' stroke-width='2'/%3E%3Cpath d='M0 58 C180 25 340 90 520 57 S820 25 1000 58' fill='none' stroke='%23ffffff' stroke-width='1' opacity='.55'/%3E%3C/svg%3E") !important;
+    }
+
+    @media (max-width: 1100px) {
+      #hero { gap: 28px; padding-left: 32px; padding-right: 32px; }
+      .hero-content { max-width: 48%; }
+      .hero-image { width: 48%; gap: 12px; }
+      .hero-image img { width: 54%; flex-basis: 54%; }
+      .athlete-panel { width: 46%; padding: 15px 12px; }
+    }
+
+    @media (max-width: 900px) {
+      #hero { flex-direction: column; gap: 30px; text-align: center; padding: 140px 24px 70px; }
+      .hero-content { max-width: 100%; }
+      .hero-stats, .hero-btns { justify-content: center; }
+      .hero-image { width: min(100%, 540px); }
+      .athlete-panel { text-align: left; }
+    }
+
     @media (max-width: 600px) {
+      .hero-image { width: min(100%, 390px); gap: 12px; }
+      .hero-image img { width: 51%; flex-basis: 51%; }
+      .athlete-panel { width: 49%; padding: 14px 11px; }
+      .athlete-panel-kicker { font-size: 0.58rem; letter-spacing: 0.8px; }
+      .athlete-badge { padding: 6px 8px; font-size: 0.58rem; }
+      .athlete-data strong { font-size: 0.72rem; }
+      .athlete-record { padding: 9px; }
+      .athlete-record strong { font-size: 1.45rem; }
+      .tempo-crono { justify-content: center; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-image { flex-direction: column; }
+      .hero-image img { width: min(100%, 270px); flex-basis: auto; }
+      .athlete-panel { width: 100%; max-width: 300px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .start-sweep,
+      .hero-lanes,
+      .tempo-crono,
+      .hero-content h1 {
+        animation: none !important;
+      }
+      .hero-content h1 {
+        opacity: 1;
+        clip-path: none;
+      }
+    }
+
+    /* Comparativo de marcas e filtros da galeria */
+    .performance-chart {
+      margin-top: 34px;
+      padding: 26px;
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      border-radius: 16px;
+      background: rgba(3, 24, 39, 0.72);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.22);
+    }
+    .performance-chart h3 {
+      margin-bottom: 6px;
+      color: #fff;
+      font: 800 1.1rem/1.4 var(--fonte-titulo);
+    }
+    .performance-chart > p {
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.88rem;
+    }
+    .performance-chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+    .performance-chart .chart-note {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.76rem;
+      line-height: 1.7;
+    }
+    .performance-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .performance-panel:not(:first-child),
+    .performance-extras {
+      display: none;
+    }
+    .performance-panel {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(0, 8, 18, 0.28);
+    }
+    .performance-panel h4 {
+      margin-bottom: 4px;
+      color: #00d4ff;
+      font: 800 0.95rem/1.4 var(--fonte-titulo);
+    }
+    .performance-panel p {
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.72rem;
+    }
+    .performance-panel svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .performance-extras {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .performance-extra {
+      padding: 15px 17px;
+      border: 1px solid rgba(0, 212, 255, 0.22);
+      border-radius: 11px;
+      background: rgba(0, 212, 255, 0.07);
+    }
+    .performance-extra span {
+      display: block;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .performance-extra strong {
+      display: block;
+      margin-top: 4px;
+      color: #ffd60a;
+      font: 900 1.35rem/1.2 var(--fonte-titulo);
+      font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 600px) {
+      .performance-panel { padding: 12px 8px; }
+      .performance-extras { grid-template-columns: 1fr; }
+    }
+    .gallery-filtros {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 0 28px;
+      flex-wrap: wrap;
+    }
+    .filtro-btn {
+      padding: 9px 18px;
+      border: 1px solid rgba(0, 212, 255, 0.55);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(3, 30, 49, 0.72);
+      font: 700 0.82rem var(--fonte-titulo);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .filtro-btn:hover,
+    .filtro-btn.ativo {
+      color: #061224;
+      background: #00d4ff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .performance-chart { padding: 18px 14px; }
+      .filtro-btn { padding: 8px 13px; font-size: 0.74rem; }
       .instagram-float {
         width: 52px;
         height: 52px;
@@ -85,6 +447,258 @@
         bottom: 78px;
         font-size: 26px;
       }
+    }
+    /* ===== QUIZ INTERATIVO: QUAL PROVA COMBINA COM VOCÊ? ===== */
+    .quiz-card {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      border-radius: 22px;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(3, 25, 42, 0.88), rgba(4, 75, 98, 0.78));
+      box-shadow: 0 22px 55px rgba(0, 8, 20, 0.32), inset 0 0 30px rgba(0, 212, 255, 0.06);
+      backdrop-filter: blur(12px);
+    }
+    .quiz-intro {
+      max-width: 680px;
+      margin: -20px 0 28px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+    .quiz-question {
+      margin: 0 0 22px;
+      padding: 0;
+      border: 0;
+    }
+    .quiz-question legend {
+      margin-bottom: 11px;
+      color: #fff;
+      font: 800 1rem/1.5 var(--fonte-titulo);
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .quiz-option {
+      position: relative;
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .quiz-option:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 212, 255, 0.7);
+      background: rgba(0, 212, 255, 0.1);
+    }
+    .quiz-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+    .quiz-option:has(input:checked) {
+      border-color: #00d4ff;
+      color: #fff;
+      background: rgba(0, 212, 255, 0.17);
+      box-shadow: inset 0 0 0 1px rgba(0, 212, 255, 0.35);
+    }
+    .quiz-option:has(input:focus-visible) {
+      outline: 3px solid #ffd60a;
+      outline-offset: 3px;
+    }
+    .quiz-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .quiz-submit {
+      border: 0;
+      cursor: pointer;
+    }
+    .quiz-hint {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.82rem;
+    }
+    .quiz-result {
+      margin-top: 26px;
+      padding: 22px;
+      border: 1px solid rgba(255, 214, 10, 0.38);
+      border-radius: 16px;
+      background: rgba(255, 214, 10, 0.08);
+      animation: revelarQuiz 0.45s ease both;
+    }
+    .quiz-result[hidden] { display: none; }
+    .quiz-result-kicker {
+      display: block;
+      margin-bottom: 6px;
+      color: #00d4ff;
+      font: 800 0.7rem/1.4 var(--fonte-titulo);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .quiz-result h3 {
+      margin-bottom: 8px;
+      color: #ffd60a;
+      font: 900 clamp(1.35rem, 3vw, 1.8rem)/1.25 var(--fonte-titulo);
+    }
+    .quiz-result p {
+      margin: 7px 0;
+      color: rgba(255, 255, 255, 0.88);
+    }
+    .quiz-result small {
+      display: block;
+      margin-top: 13px;
+      color: rgba(255, 255, 255, 0.62);
+      line-height: 1.6;
+    }
+    .quiz-retry {
+      margin-top: 16px;
+      padding: 9px 15px;
+      border: 1px solid rgba(0, 212, 255, 0.55);
+      border-radius: 999px;
+      color: #fff;
+      background: transparent;
+      font: 700 0.8rem var(--fonte-titulo);
+      cursor: pointer;
+    }
+    .quiz-retry:hover {
+      color: #061224;
+      background: #00d4ff;
+    }
+    @keyframes revelarQuiz {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 700px) {
+      .quiz-options { grid-template-columns: 1fr; }
+      .quiz-option { min-height: 50px; }
+      .quiz-actions { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .quiz-result { animation: none; }
+      .quiz-option { transition: none; }
+    }
+
+    /* ===== JOGO DE TEMPO DE REAÇÃO ===== */
+    .reaction-card {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      border-radius: 22px;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(3, 25, 42, 0.9), rgba(4, 75, 98, 0.78));
+      box-shadow: 0 22px 55px rgba(0, 8, 20, 0.32), inset 0 0 30px rgba(0, 212, 255, 0.06);
+      backdrop-filter: blur(12px);
+    }
+    .reaction-intro {
+      max-width: 700px;
+      margin: -20px 0 24px;
+      color: rgba(255, 255, 255, 0.84);
+    }
+    .reaction-intro strong { color: #ffd60a; }
+    .reaction-stage {
+      display: grid;
+      min-height: 230px;
+      place-items: center;
+      padding: 28px;
+      border: 1px solid rgba(0, 212, 255, 0.28);
+      border-radius: 18px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(0, 212, 255, 0.13), transparent 52%),
+        rgba(0, 8, 18, 0.42);
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .reaction-stage.is-waiting {
+      border-color: rgba(255, 75, 75, 0.7);
+      background: radial-gradient(circle at 50% 45%, rgba(255, 60, 60, 0.2), transparent 55%), #160d17;
+    }
+    .reaction-stage.is-ready {
+      border-color: rgba(60, 255, 160, 0.85);
+      background: radial-gradient(circle at 50% 45%, rgba(60, 255, 160, 0.25), transparent 55%), #06251d;
+      box-shadow: 0 0 35px rgba(60, 255, 160, 0.14), inset 0 0 25px rgba(60, 255, 160, 0.08);
+    }
+    .reaction-stage-content { max-width: 600px; }
+    .reaction-signal {
+      display: block;
+      margin-bottom: 10px;
+      color: #00d4ff;
+      font: 800 0.72rem/1.4 var(--fonte-titulo);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .reaction-stage h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font: 900 clamp(1.5rem, 4vw, 2.35rem)/1.2 var(--fonte-titulo);
+    }
+    .reaction-stage p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9rem;
+    }
+    .reaction-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .reaction-button {
+      min-width: 210px;
+      border: 0;
+      cursor: pointer;
+    }
+    .reaction-button:disabled { cursor: wait; opacity: 0.75; }
+    .reaction-result {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255, 214, 10, 0.35);
+      border-radius: 14px;
+      text-align: center;
+      background: rgba(255, 214, 10, 0.07);
+    }
+    .reaction-result[hidden] { display: none; }
+    .reaction-result strong {
+      display: block;
+      color: #ffd60a;
+      font: 900 clamp(1.8rem, 5vw, 2.7rem)/1.2 var(--fonte-titulo);
+      font-variant-numeric: tabular-nums;
+    }
+    .reaction-result p {
+      margin: 5px 0 0;
+      color: rgba(255, 255, 255, 0.82);
+    }
+    .reaction-note {
+      display: block;
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.76rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .reaction-stage { min-height: 200px; padding: 20px 14px; }
+      .reaction-actions { align-items: stretch; flex-direction: column; }
+      .reaction-button { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reaction-stage { transition: none; }
     }
   </style>
 </head>
@@ -108,6 +722,8 @@
   <!-- ===== HERO ===== -->
   <section id="hero">
     <div class="hero-overlay"></div>
+    <div class="hero-lanes" aria-hidden="true"></div>
+    <div class="start-sweep" aria-hidden="true"></div>
     <div class="hero-content">
       <span class="badge-disponivel"><i class="fas fa-circle"></i> Disponível para Patrocínio — 2026</span>
       <p class="hero-tag">🏊 Velocista de Natação • Categoria Sênior</p>
@@ -143,6 +759,23 @@
     <div class="hero-image">
       <div class="hero-image-glow"></div>
       <img src="images/foto-atleta.png" alt="Guilherme Guedes — Nadador Velocista" loading="eager" />
+      <div class="athlete-panel">
+        <span class="athlete-panel-kicker"><i class="fas fa-bolt"></i> PERFIL DO ATLETA</span>
+        <span class="athlete-badge"><i class="fas fa-medal"></i> Alto rendimento</span>
+        <div class="athlete-data">
+          <span>Categoria</span>
+          <strong>Sênior</strong>
+        </div>
+        <div class="athlete-data">
+          <span>Especialidades</span>
+          <strong>50m e 100m<br />Nado livre e estilos</strong>
+        </div>
+        <div class="athlete-record">
+          <span>50m Livre</span>
+          <strong>23s61</strong>
+          <small>Melhor marca absoluta</small>
+        </div>
+      </div>
     </div>
     <a href="#sobre" class="scroll-indicator"><i class="fas fa-chevron-down"></i></a>
   </section>
@@ -459,7 +1092,249 @@
         </div>
 
       </div>
-      <p class="fonte-ranking">Fonte: cbda.org.br — Janeiro/2026</p>
+      <div class="performance-chart" role="group" aria-labelledby="performanceChartTitle">
+        <h3 id="performanceChartTitle">Evolução das marcas — piscina de 50 m</h3>
+
+
+        <div class="performance-grid">
+          <div class="performance-panel">
+            <h4>50 m Livre</h4>
+            <p>Sequência dos resultados até a melhor marca absoluta de 23s61.</p>
+            <svg viewBox="0 0 760 245" role="img" aria-label="Gráfico dos 50 metros livre: 24,45; 24,24; 24,06; 23,83; 23,99; 24,02; e melhor marca de 23,61 segundos.">
+              <g stroke="rgba(255,255,255,.14)" stroke-width="1">
+                <line x1="70" y1="55" x2="710" y2="55" />
+                <line x1="70" y1="115" x2="710" y2="115" />
+                <line x1="70" y1="175" x2="710" y2="175" />
+              </g>
+              <g fill="rgba(255,255,255,.65)" font-size="11" text-anchor="end">
+                <text x="61" y="59">23,5 s</text>
+                <text x="61" y="119">24,0 s</text>
+                <text x="61" y="179">24,5 s</text>
+              </g>
+              <polyline points="90,169 190,144 290,123 390,96 490,115 590,119 690,70" fill="none" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <g fill="#061224" stroke="#00d4ff" stroke-width="3">
+                <circle cx="90" cy="169" r="5" />
+                <circle cx="190" cy="144" r="5" />
+                <circle cx="290" cy="123" r="5" />
+                <circle cx="390" cy="96" r="5" />
+                <circle cx="490" cy="115" r="5" />
+                <circle cx="590" cy="119" r="5" />
+              </g>
+              <circle cx="690" cy="70" r="8" fill="#ffd60a" stroke="#fff" stroke-width="3" />
+              <g fill="rgba(255,255,255,.88)" font-size="11" font-weight="700" text-anchor="middle">
+                <text x="90" y="155">24,45</text>
+                <text x="190" y="130">24,24</text>
+                <text x="290" y="109">24,06</text>
+                <text x="390" y="82">23,83</text>
+                <text x="490" y="101">23,99</text>
+                <text x="590" y="105">24,02</text>
+                <text x="690" y="55" fill="#ffd60a">23,61</text>
+              </g>
+              <g fill="rgba(255,255,255,.62)" font-size="10" text-anchor="middle">
+                <text x="90" y="205">1</text><text x="190" y="205">2</text><text x="290" y="205">3</text>
+                <text x="390" y="205">4</text><text x="490" y="205">5</text><text x="590" y="205">6</text><text x="690" y="205">7</text>
+              </g>
+              <text x="70" y="232" fill="rgba(255,255,255,.52)" font-size="10">Ordem dos resultados • tempo em segundos</text>
+            </svg>
+          </div>
+
+          <div class="performance-panel">
+            <h4>100 m Livre</h4>
+            <p>Resultados em piscina de 50 m; marcas de piscina de 25 m ficam separadas.</p>
+            <svg viewBox="0 0 760 245" role="img" aria-label="Gráfico dos 100 metros livre: 55,80; 52,86; 53,40; 54,12; 54,83; e 53,65 segundos.">
+              <g stroke="rgba(255,255,255,.14)" stroke-width="1">
+                <line x1="70" y1="55" x2="710" y2="55" />
+                <line x1="70" y1="115" x2="710" y2="115" />
+                <line x1="70" y1="175" x2="710" y2="175" />
+              </g>
+              <g fill="rgba(255,255,255,.65)" font-size="11" text-anchor="end">
+                <text x="61" y="59">52 s</text><text x="61" y="119">54 s</text><text x="61" y="179">56 s</text>
+              </g>
+              <polyline points="90,169 210,81 330,97 450,118 570,139 690,104" fill="none" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <g fill="#061224" stroke="#00d4ff" stroke-width="3">
+                <circle cx="90" cy="169" r="5" /><circle cx="210" cy="81" r="5" /><circle cx="330" cy="97" r="5" />
+                <circle cx="450" cy="118" r="5" /><circle cx="570" cy="139" r="5" /><circle cx="690" cy="104" r="5" />
+              </g>
+              <circle cx="210" cy="81" r="8" fill="#ffd60a" stroke="#fff" stroke-width="3" />
+              <g fill="rgba(255,255,255,.88)" font-size="11" font-weight="700" text-anchor="middle">
+                <text x="90" y="155">55,80</text><text x="210" y="66" fill="#ffd60a">52,86</text><text x="330" y="82">53,40</text>
+                <text x="450" y="103">54,12</text><text x="570" y="124">54,83</text><text x="690" y="89">53,65</text>
+              </g>
+              <g fill="rgba(255,255,255,.62)" font-size="10" text-anchor="middle">
+                <text x="90" y="205">1</text><text x="210" y="205">2</text><text x="330" y="205">3</text>
+                <text x="450" y="205">4</text><text x="570" y="205">5</text><text x="690" y="205">6</text>
+              </g>
+              <text x="70" y="232" fill="rgba(255,255,255,.52)" font-size="10">Ordem dos resultados • tempo em segundos</text>
+            </svg>
+          </div>
+
+          <div class="performance-panel">
+            <h4>50 m Borboleta</h4>
+            <p>Resultados em piscina de 50 m.</p>
+            <svg viewBox="0 0 760 245" role="img" aria-label="Gráfico dos 50 metros borboleta: 26,70; 25,83; 25,80; 25,46; 25,60; e 26,03 segundos.">
+              <g stroke="rgba(255,255,255,.14)" stroke-width="1">
+                <line x1="70" y1="55" x2="710" y2="55" />
+                <line x1="70" y1="115" x2="710" y2="115" />
+                <line x1="70" y1="175" x2="710" y2="175" />
+              </g>
+              <g fill="rgba(255,255,255,.65)" font-size="11" text-anchor="end">
+                <text x="61" y="59">25,2 s</text><text x="61" y="119">26,0 s</text><text x="61" y="179">26,8 s</text>
+              </g>
+              <polyline points="90,168 210,103 330,101 450,76 570,86 690,118" fill="none" stroke="#00d4ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <g fill="#061224" stroke="#00d4ff" stroke-width="3">
+                <circle cx="90" cy="168" r="5" /><circle cx="210" cy="103" r="5" /><circle cx="330" cy="101" r="5" />
+                <circle cx="450" cy="76" r="5" /><circle cx="570" cy="86" r="5" /><circle cx="690" cy="118" r="5" />
+              </g>
+              <circle cx="450" cy="76" r="8" fill="#ffd60a" stroke="#fff" stroke-width="3" />
+              <g fill="rgba(255,255,255,.88)" font-size="11" font-weight="700" text-anchor="middle">
+                <text x="90" y="153">26,70</text><text x="210" y="88">25,83</text><text x="330" y="86">25,80</text>
+                <text x="450" y="60" fill="#ffd60a">25,46</text><text x="570" y="71">25,60</text><text x="690" y="103">26,03</text>
+              </g>
+              <g fill="rgba(255,255,255,.62)" font-size="10" text-anchor="middle">
+                <text x="90" y="205">1</text><text x="210" y="205">2</text><text x="330" y="205">3</text>
+                <text x="450" y="205">4</text><text x="570" y="205">5</text><text x="690" y="205">6</text>
+              </g>
+              <text x="70" y="232" fill="rgba(255,255,255,.52)" font-size="10">Ordem dos resultados • tempo em segundos</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="performance-extras" aria-label="Outras marcas disponíveis">
+          <div class="performance-extra">
+            <span>50 m Peito • piscina de 50 m</span>
+            <strong>30s47</strong>
+          </div>
+          <div class="performance-extra">
+            <span>100 m Borboleta • piscina de 50 m</span>
+            <strong>59s27</strong>
+          </div>
+        </div>
+
+
+      </div>
+      <p class="fonte-ranking">Fonte: CBDA (Confederação Brasileira de Desportos Aquáticos).</p>
+    </div>
+    <div class="onda-divisor onda-base"></div>
+  </section>
+
+  <!-- ===== QUIZ INTERATIVO ===== -->
+  <section id="quiz" class="sec-oceano">
+    <div class="onda-divisor onda-topo"></div>
+    <div class="bolhas" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="container">
+      <span class="tag-secao tag-clara">DESCUBRA SEU PERFIL</span>
+      <h2 class="section-title">Qual prova combina com você?</h2>
+      <p class="quiz-intro">
+        Responda às perguntas abaixo e descubra que perfil de nadador você seria e quais seriam suas possíveis provas principais.
+      </p>
+
+      <form class="quiz-card" id="swimQuiz">
+        <fieldset class="quiz-question">
+          <legend>1. Quando você se dedica a um desafio, o que mais combina com você?</legend>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q1" value="sprint" required /><span>Agir com intensidade e buscar um resultado rápido</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="meio" /><span>Encontrar um ritmo forte e administrar meu esforço</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="fundo" /><span>Manter a constância e superar desafios até o fim</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="medley" /><span>Alternar estratégias e experimentar formas diferentes de fazer</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>2. O que costuma te dar mais satisfação ao superar uma dificuldade?</legend>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q2" value="sprint" required /><span>Resolver a situação com energia e precisão</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="meio" /><span>Encontrar o equilíbrio entre esforço e controle</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="fundo" /><span>Continuar tentando, mesmo quando fica difícil</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="medley" /><span>Aprender algo novo e combinar habilidades diferentes</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>3. Em uma atividade física, como você costuma agir?</legend>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q3" value="sprint" required /><span>Começo com bastante energia e foco</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="meio" /><span>Dosifico minha energia para manter um bom desempenho</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="fundo" /><span>Encontro um ritmo constante e sigo em frente</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="medley" /><span>Vario meus movimentos e me adapto ao que acontece</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>4. Qual tipo de desafio você escolheria?</legend>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q4" value="sprint" required /><span>Uma tarefa rápida que exige atenção e reação</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="meio" /><span>Um desafio que pede estratégia do começo ao fim</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="fundo" /><span>Uma meta longa que exige paciência e regularidade</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="medley" /><span>Uma atividade variada, com etapas e habilidades distintas</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz-question">
+          <legend>5. Quando está aprendendo uma habilidade nova, o que prefere?</legend>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q5" value="sprint" required /><span>Treinar movimentos curtos até fazê-los com precisão</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="meio" /><span>Praticar em etapas e ajustar meu ritmo aos poucos</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="fundo" /><span>Repetir por mais tempo para desenvolver consistência</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="medley" /><span>Experimentar técnicas diferentes e combiná-las</span></label>
+          </div>
+        </fieldset>
+
+        <div class="quiz-actions">
+          <button class="btn btn-primary quiz-submit" type="submit">Ver meu perfil</button>
+          <span class="quiz-hint">Não existe resposta certa — escolha o que mais combina com você.</span>
+        </div>
+
+        <div class="quiz-result" id="quizResult" role="status" aria-live="polite" hidden>
+          <span class="quiz-result-kicker">Seu perfil recreativo</span>
+          <h3 id="quizTitle"></h3>
+          <p id="quizRecommendation"></p>
+          <p id="quizConnection"></p>
+          <small>Este quiz é uma brincadeira informativa baseada nas suas preferências. Não mede habilidade nem substitui orientação de um treinador.</small>
+          <button class="quiz-retry" id="quizRetry" type="button">Refazer quiz</button>
+        </div>
+      </form>
+    </div>
+    <div class="onda-divisor onda-base"></div>
+  </section>
+
+  <!-- ===== JOGO DE TEMPO DE REAÇÃO ===== -->
+  <section id="tempo-reacao" class="sec-oceano">
+    <div class="onda-divisor onda-topo"></div>
+    <div class="bolhas" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="container">
+      <span class="tag-secao tag-clara">DESAFIO INTERATIVO</span>
+      <h2 class="section-title">Teste seu tempo de reação</h2>
+      <p class="reaction-intro">
+        Você sabia? Em provas de velocidade, atletas de alto rendimento podem reagir em cerca de
+        <strong>0,50 a 0,65 segundo</strong> — esse tempo varia conforme a modalidade e o tipo de estímulo.
+        Teste sua reação: comece e aguarde o sinal verde para tocar.
+      </p>
+
+      <div class="reaction-card">
+        <div class="reaction-stage" id="reactionStage" aria-live="polite">
+          <div class="reaction-stage-content">
+            <span class="reaction-signal" id="reactionSignal">Pronto para a largada?</span>
+            <h3 id="reactionHeading">Concentre-se</h3>
+            <p id="reactionMessage">Clique no botão para começar. Não toque antes do sinal verde!</p>
+          </div>
+        </div>
+
+        <div class="reaction-actions">
+          <button class="btn btn-primary reaction-button" id="reactionButton" type="button">Iniciar teste</button>
+        </div>
+
+        <div class="reaction-result" id="reactionResult" role="status" aria-live="polite" hidden>
+          <strong id="reactionTime"></strong>
+          <p id="reactionFeedback"></p>
+        </div>
+
+      </div>
     </div>
     <div class="onda-divisor onda-base"></div>
   </section>
@@ -475,36 +1350,42 @@
       <span class="tag-secao tag-clara">MOMENTOS</span>
       <h2 class="section-title">Galeria</h2>
       <p class="section-subtitle">Treinos, competições e conquistas registradas</p>
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="images/natacao1.jpeg" alt="Natação - foto 1" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao2.jpeg" alt="Natação - foto 2" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao3.jpeg" alt="Natação - foto 3" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao4.jpeg" alt="Natação - foto 4" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao5.jpeg" alt="Natação - foto 5" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao6.jpeg" alt="Natação - foto 6" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao7.jpeg" alt="Natação - foto 7" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao8.jpeg" alt="Natação - foto 8" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao9.jpeg" alt="Natação - foto 9" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao10.jpeg" alt="Natação - foto 10" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao11.jpeg" alt="Natação - foto 11" loading="lazy" /></div>
-        <div class="gallery-item"><img src="images/natacao12.jpeg" alt="Natação - foto 12" loading="lazy" /></div>
+      <div class="gallery-filtros" role="group" aria-label="Filtrar galeria por categoria">
+        <button class="filtro-btn ativo" type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+        <button class="filtro-btn" type="button" data-filtro="foto" aria-pressed="false">Fotos</button>
+        <button class="filtro-btn" type="button" data-filtro="video" aria-pressed="false">Vídeos</button>
 
-        <div class="gallery-item">
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao1.jpeg" alt="Natação - foto 1" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao2.jpeg" alt="Natação - foto 2" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao3.jpeg" alt="Natação - foto 3" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao4.jpeg" alt="Natação - foto 4" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao5.jpeg" alt="Natação - foto 5" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao6.jpeg" alt="Natação - foto 6" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao7.jpeg" alt="Natação - foto 7" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao8.jpeg" alt="Natação - foto 8" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao9.jpeg" alt="Natação - foto 9" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao10.jpeg" alt="Natação - foto 10" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao11.jpeg" alt="Natação - foto 11" loading="lazy" /></div>
+        <div class="gallery-item" data-categoria="foto"><img src="images/natacao12.jpeg" alt="Natação - foto 12" loading="lazy" /></div>
+
+        <div class="gallery-item" data-categoria="foto competicao">
           <img src="images/concurso-master-2026.jpg" alt="Guilherme Guedes no 2º Concurso Master 2026, em Feira de Santana" loading="lazy" />
           <div class="gallery-caption">2º Concurso Master 2026 • Feira de Santana</div>
         </div>
 
-        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/-5dOT_scxq4?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 1">
+        <div class="gallery-item video-item" data-categoria="video" data-video="https://www.youtube-nocookie.com/embed/-5dOT_scxq4?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 1">
           <img src="https://img.youtube.com/vi/-5dOT_scxq4/hqdefault.jpg" alt="Vídeo de treino de natação 1" loading="lazy" />
           <div class="gallery-caption">Momentos do atleta</div>
         </div>
 
-        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/4SI5wKTa8rE?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 2">
+        <div class="gallery-item video-item" data-categoria="video" data-video="https://www.youtube-nocookie.com/embed/4SI5wKTa8rE?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 2">
           <img src="https://img.youtube.com/vi/4SI5wKTa8rE/hqdefault.jpg" alt="Vídeo de treino de natação 2" loading="lazy" />
           <div class="gallery-caption">Momentos do atleta</div>
         </div>
 
-        <div class="gallery-item video-item" data-video="https://www.youtube-nocookie.com/embed/l9LlP9byqkk?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 3">
+        <div class="gallery-item video-item" data-categoria="video" data-video="https://www.youtube-nocookie.com/embed/l9LlP9byqkk?autoplay=1&rel=0" role="button" tabindex="0" aria-label="Assistir vídeo de treino 3">
           <img src="https://img.youtube.com/vi/l9LlP9byqkk/hqdefault.jpg" alt="Vídeo de treino de natação 3" loading="lazy" />
           <div class="gallery-caption">Momentos do atleta</div>
         </div>
@@ -774,6 +1655,28 @@
     let visibleItems = [];
     let currentIndex = 0;
 
+    const filtroBtns = Array.from(document.querySelectorAll('.filtro-btn'));
+
+    filtroBtns.forEach(button => {
+      button.addEventListener('click', () => {
+        const filtro = button.dataset.filtro;
+
+        filtroBtns.forEach(item => {
+          const ativo = item === button;
+          item.classList.toggle('ativo', ativo);
+          item.setAttribute('aria-pressed', String(ativo));
+        });
+
+        galleryItems.forEach(item => {
+          const categorias = (item.dataset.categoria || '').split(' ');
+          const corresponde = filtro === 'todos' || categorias.includes(filtro);
+          item.classList.toggle('oculto', !corresponde);
+        });
+
+        refreshVisibleItems();
+      });
+    });
+
     function refreshVisibleItems() {
       visibleItems = galleryItems.filter(item => !item.classList.contains('oculto'));
     }
@@ -843,6 +1746,151 @@
       if (event.key === 'ArrowLeft') showGalleryItem(currentIndex - 1);
       if (event.key === 'ArrowRight') showGalleryItem(currentIndex + 1);
     });
+
+    // ===== QUIZ: PERFIL DE NATAÇÃO =====
+    const swimQuiz = document.getElementById('swimQuiz');
+    const quizResult = document.getElementById('quizResult');
+    const quizTitle = document.getElementById('quizTitle');
+    const quizRecommendation = document.getElementById('quizRecommendation');
+    const quizConnection = document.getElementById('quizConnection');
+    const quizRetry = document.getElementById('quizRetry');
+
+    const swimProfiles = {
+      sprint: {
+        title: 'Você tem perfil de velocista!',
+        recommendation: 'Você parece combinar com provas curtas e intensas, em que potência, reação e velocidade fazem diferença. Experimente conhecer os 50 m e 100 m.',
+        connection: 'Guilherme também tem perfil velocista: 23s61 nos 50 m Livre.'
+      },
+      meio: {
+        title: 'Você tem perfil de meio-fundista!',
+        recommendation: 'Você parece combinar com provas que pedem velocidade e controle para manter um ritmo forte. Os 200 m e 400 m podem ter a ver com você.',
+        connection: ''
+      },
+      fundo: {
+        title: 'Você tem perfil de fundista!',
+        recommendation: 'Você parece gostar de desafios longos e de sustentar o esforço. Os 800 m, 1.500 m e as provas de águas abertas podem combinar com suas preferências.',
+        connection: ''
+      },
+      medley: {
+        title: 'Você tem perfil versátil — pode gostar de medley!',
+        recommendation: 'Você parece gostar de variedade, técnica e coordenação. O medley reúne os quatro estilos: borboleta, costas, peito e livre.',
+        connection: ''
+      }
+    };
+
+    if (swimQuiz) {
+      swimQuiz.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const answers = new FormData(swimQuiz);
+        const scores = { sprint: 0, meio: 0, fundo: 0, medley: 0 };
+
+        for (let question = 1; question <= 5; question += 1) {
+          const answer = answers.get(`q${question}`);
+          if (answer && Object.prototype.hasOwnProperty.call(scores, answer)) {
+            scores[answer] += 1;
+          }
+        }
+
+        const highestScore = Math.max(...Object.values(scores));
+        const leaders = Object.keys(scores).filter(profile => scores[profile] === highestScore);
+        const profile = leaders.length === 1 ? leaders[0] : 'medley';
+        const result = swimProfiles[profile];
+
+        quizTitle.textContent = result.title;
+        quizRecommendation.textContent = result.recommendation;
+        quizConnection.textContent = result.connection;
+        quizConnection.hidden = !result.connection;
+        quizResult.hidden = false;
+        quizResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+
+    if (quizRetry && swimQuiz && quizResult) {
+      quizRetry.addEventListener('click', () => {
+        swimQuiz.reset();
+        quizResult.hidden = true;
+        swimQuiz.querySelector('input')?.focus();
+      });
+    }
+
+    // ===== JOGO DE TEMPO DE REAÇÃO =====
+    const reactionStage = document.getElementById('reactionStage');
+    const reactionButton = document.getElementById('reactionButton');
+    const reactionSignal = document.getElementById('reactionSignal');
+    const reactionHeading = document.getElementById('reactionHeading');
+    const reactionMessage = document.getElementById('reactionMessage');
+    const reactionResult = document.getElementById('reactionResult');
+    const reactionTime = document.getElementById('reactionTime');
+    const reactionFeedback = document.getElementById('reactionFeedback');
+
+    let reactionState = 'idle';
+    let reactionTimer = null;
+    let reactionStartedAt = 0;
+    let bestReaction = null;
+
+    if (reactionButton && reactionStage) {
+      reactionButton.addEventListener('click', () => {
+        if (reactionState === 'waiting') {
+          window.clearTimeout(reactionTimer);
+          reactionState = 'result';
+          reactionStage.classList.remove('is-waiting');
+          reactionSignal.textContent = 'Falsa largada';
+          reactionHeading.textContent = 'Você antecipou o sinal!';
+          reactionMessage.textContent = 'Espere o verde aparecer antes de tocar no botão.';
+          reactionButton.textContent = 'Tentar novamente';
+          reactionResult.hidden = true;
+          return;
+        }
+
+        if (reactionState === 'ready') {
+          const elapsed = Math.round(performance.now() - reactionStartedAt);
+          const foiRapido = elapsed < 800;
+          reactionState = 'result';
+          reactionStage.classList.remove('is-ready');
+          reactionButton.textContent = 'Tentar novamente';
+
+          if (bestReaction === null || elapsed < bestReaction) bestReaction = elapsed;
+
+          if (foiRapido) {
+            reactionSignal.textContent = 'Tempo registrado';
+            reactionHeading.textContent = 'Boa reação!';
+            reactionMessage.textContent = 'Pronto para tentar mais uma vez?';
+          } else {
+            reactionSignal.textContent = 'Tente novamente';
+            reactionHeading.textContent = 'Concentre-se!';
+            reactionMessage.textContent = 'Seu tempo foi de 0,80 s ou mais. Concentre-se e tente de novo.';
+          }
+
+          reactionTime.textContent = `${(elapsed / 1000).toFixed(2).replace('.', ',')} s`;
+          reactionFeedback.textContent = `Seu melhor tempo nesta sessão: ${(bestReaction / 1000).toFixed(2).replace('.', ',')} s.`;
+          reactionResult.hidden = false;
+          return;
+        }
+
+        reactionState = 'waiting';
+        reactionResult.hidden = true;
+        reactionStage.classList.remove('is-ready');
+        reactionStage.classList.add('is-waiting');
+        reactionSignal.textContent = 'Atenção';
+        reactionHeading.textContent = 'Aguarde o verde…';
+        reactionMessage.textContent = 'Não toque antes do sinal.';
+        reactionButton.textContent = 'Aguardando sinal…';
+
+        const delay = 1500 + Math.random() * 3500;
+        reactionTimer = window.setTimeout(() => {
+          if (reactionState !== 'waiting') return;
+          reactionState = 'ready';
+          reactionStartedAt = performance.now();
+          reactionStage.classList.remove('is-waiting');
+          reactionStage.classList.add('is-ready');
+          reactionSignal.textContent = 'AGORA!';
+          reactionHeading.textContent = 'TOQUE!';
+          reactionMessage.textContent = 'Clique no botão o mais rápido que puder.';
+          reactionButton.textContent = 'TOQUE AGORA!';
+        }, delay);
+      });
+    }
   </script>
 </body>
 </html>
